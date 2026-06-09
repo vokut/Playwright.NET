@@ -7,12 +7,10 @@ namespace Playwright.Tests.Pages
     {
         public RecruitmentPage(IPage page) : base(page) { }
 
-        // Locators
         private ILocator CandidateProfileContainer =>
             Page.Locator(".orangehrm-card-container")
                 .Filter(new() { Has = Page.GetByRole(AriaRole.Heading, new() { Name = "Candidate Profile" }) });
 
-        //Methods
 
         public async Task SaveCandidateAsync()
         {

@@ -7,13 +7,13 @@ namespace Playwright.Tests.Pages
     {
         public LoginPage(IPage page) : base(page) { }
 
-        // 🔹 Locators
+        // Locators
         private ILocator UsernameInput => Page.GetByPlaceholder("Username");
         private ILocator PasswordInput => Page.GetByPlaceholder("Password");
         private ILocator LoginButton => Page.GetByRole(AriaRole.Button, new() { Name = "Login" });
         private ILocator Version => Page.Locator(".orangehrm-copyright-wrapper p").First;
 
-        // 🔹 Methods
+        // Methods
 
         public async Task GoToLoginPageAsync()
         {

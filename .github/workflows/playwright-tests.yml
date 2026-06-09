@@ -41,6 +41,8 @@ jobs:
         run: allure --version
         
       - name: Run Playwright tests
+        id: run-tests
+        continue-on-error: true
         env:
           TEST_ENVIRONMENT: prod
           Framework__ORANGEHRM_URL: ${{ secrets.ORANGEHRM_URL }}
@@ -51,7 +53,7 @@ jobs:
             --configuration Release \
             --no-build \
             -- NUnit.NumberOfTestWorkers=6 \
-            --settings nunit.runsettings || true  # prevents job failure
+            --settings nunit.runsettings
 
       - name: Check if allure-results exists
         if: always()
@@ -77,7 +79,13 @@ jobs:
         with:
           name: allure-report
           path: Playwright.Tests/bin/Release/net9.0/allure-report
-          if-no-files-found: warn  # allow missing reports but still continue
+          if-no-files-found: warn
+
+      - name: Formally Fail Job if Tests Failed
+        if: always() && steps.run-tests.outcome == 'failure'
+        run: |
+          echo "❌ Test execution contained failures. Marking job as failed."
+          exit 1
 
   deploy:
     needs: test
@@ -134,4 +142,4 @@ jobs:
       - name: Add report link to summary
         if: always()
         run: |
-          echo "✅ [View Latest Allure Report](https://vokut.github.io/PlaywrightSolution/)" >> $GITHUB_STEP_SUMMARY
+          echo "✅ [View Latest Allure Report](https://vokut.github.io/Playwright.NET/)" >> $GITHUB_STEP_SUMMARY

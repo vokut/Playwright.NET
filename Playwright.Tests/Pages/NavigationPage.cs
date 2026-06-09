@@ -22,11 +22,11 @@ namespace Playwright.Tests.Pages
     {
         public NavigationPage(IPage page) : base(page) { }
 
-        //Locator
+        // Locators
         private ILocator MenuItem(MenuItems item)
             => Page.GetByRole(AriaRole.Link, new() { Name = item.ToString() });
 
-        //Method
+        // Methods
         public async Task ClickMenuItemAsync(MenuItems item)
         {
             await MenuItem(item).ClickAsync();

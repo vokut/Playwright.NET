@@ -9,10 +9,4 @@
   <Allure>
     <Directory>allure-results</Directory>
   </Allure>
-
-  <!-- Reqnroll configuration -->
-  <Reqnroll>
-    <!-- Exclude all features or scenarios tagged with @helper -->
-    <FilterTags>~@helper</FilterTags>
-  </Reqnroll>
 </RunSettings>

@@ -7,7 +7,6 @@ namespace Playwright.Tests.Pages
     {
         public AdminPage(IPage page) : base(page) { }
 
-        // Methods
 
         public async Task OpenAdminSectionAsync(string mainSection, string subSection)
         {

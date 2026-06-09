@@ -7,14 +7,12 @@ namespace Playwright.Tests.Pages
     {
         public PIMPage(IPage page) : base(page) { }
 
-        // 🔹 Locator helper
         private ILocator EmployeeProfileContainer(string sectionName)
         {
             return Page.Locator(".orangehrm-card-container")
                        .Filter(new() { Has = Page.GetByRole(AriaRole.Heading, new() { Name = sectionName }) });
         }
 
-        // 🔹 Methods
 
         public async Task SaveEmployeeAsync()
         {
